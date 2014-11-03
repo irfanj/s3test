@@ -1,4 +1,4 @@
-#!/bin/bash
+##### RUN THIS FROM OUTSIDE OF AWS (ie desktop)
 
 # create 10Mb test file
 tfile=testdata.bin
@@ -19,7 +19,11 @@ sleep 3h
 s3cmd put ${tfile} s3://ULTEST_DELAY
 s3cmd put ${tfile} s3://ultest-delay
 
-# finally, fetch the files back and look at the download times.
+
+
+#### RUN THESE FROM AN EC2 INSTANCE
+
+# fetch the files back and look at the download times.
 # for fairness you should do this multiple times and average,
 # but you should see the same result
 s3cmd get s3://ULTEST_NODELAY/${tfile} tmp.1
@@ -27,7 +31,7 @@ s3cmd get s3://ultest-nodelay/${tfile} tmp.2
 s3cmd get s3://ULTEST_DELAY/${tfile} tmp.3
 s3cmd get s3://ultest-delay/${tfile} tmp.4
 
-exit
+
 #### CLEANUP
 # delete files
 s3cmd del s3://ULTEST_DELAY/${tfile}
